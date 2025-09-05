@@ -1,30 +1,39 @@
 import { IProduct } from '@/types';
-import React from 'react';
+import Image from 'next/image';
 
 const Card: React.FC<IProduct> = ({
   name,
   price,
-  //   description,
+  description,
   image,
   stock,
   categoryId,
 }) => {
+  // Elimina espacios en blanco al final de la URL
+  const safeImage = image?.trim() || '';
+
   return (
     <div>
-      <img
-        src={image}
-        alt={`Imagen de producto: ${name}`}
-        height={300}
-        width={300}
-      />
-      <div>
-        <h2>{name}</h2>
-        <p>Precio {price}</p>
-        {/* <p>{description}</p> */}
-        <p>Cantidad {stock}</p>
-        <p>Categoria {categoryId}</p>
+      <div className='relative w-72 h-72 overflow-hidden'>
+        <Image
+          src={safeImage}
+          alt={`Imagen de producto: ${name}`}
+          width={300}
+          height={300}
+          priority // Para pre-cargar la imagen, es decir, cargando de forma prioritaria
+          className='object-cover'
+          placeholder='empty' // Opcional: si quieres un placeholder
+        />
+      </div>
+      <div className='mt-3'>
+        <h2 className='text-xl font-bold'>{name}</h2>
+        <p className='text-gray-700'>Precio: ${price}</p>
+        <p className='text-sm text-gray-600'>{description}</p>
+        <p className='text-sm'>Cantidad: {stock}</p>
+        <p className='text-sm'>Categoría: {categoryId}</p>
       </div>
     </div>
   );
 };
+
 export default Card;
