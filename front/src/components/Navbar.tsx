@@ -1,10 +1,16 @@
 'use client';
-import { NavItems } from '@/helpers/NavItems';
+import { NavItems } from '@/helpers/NavItems'; // Importa el array de objetos NavItems
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'; // Hook para obtener la ruta actual
 
 const Navbar = () => {
-  const pathname = usePathname(); // Detecta la ruta actual
+  const pathname = usePathname(); // Obtiene la ruta actual
+
+  // Función para determinar si una ruta es activa
+  const isActive = (currentPath: string, route: string) => {
+    if (route === '/') return currentPath === '/';
+    return currentPath === route || currentPath.startsWith(route + '/');
+  };
 
   return (
     <nav className='bg-gray-800 text-white p-4 shadow-md'>
@@ -12,15 +18,17 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           href='/'
-          className='text-lg font-bold hover:text-gray-300 transition'
+          className={`text-lg font-bold transition ${
+            pathname === '/' ? 'text-white' : 'hover:text-gray-300'
+          }`}
         >
           MyApp E-commerce
         </Link>
 
-        {/* Lista de enlaces de navegación */}
+        {/* Lista de enlaces */}
         <ul className='flex space-x-6 md:space-x-8'>
           {NavItems.map((item) => {
-            const isActive = pathname === item.route; // Verifica si la ruta actual coincide con la ruta del enlace
+            const isActiveLink = isActive(pathname, item.route);
 
             return (
               <li key={item.name}>
@@ -28,7 +36,7 @@ const Navbar = () => {
                   href={item.route}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition duration-200
                     ${
-                      isActive
+                      isActiveLink
                         ? 'text-white bg-gray-700'
                         : 'text-gray-300 hover:text-white hover:bg-gray-700'
                     }

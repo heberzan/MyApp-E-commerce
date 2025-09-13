@@ -1,7 +1,16 @@
 /* Importa las directivas esenciales de Tailwind CSS */
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #19183b; /*azul oscuro profundo*/
+  --color-secondary: #708993; /*gris azulado suave */
+  --color-accent: #a1c2bd; /* verde azulado */
+  --color-background: #e7f2ef; /* blanco verdoso */
+}
 
 /* Puedes agregar estilos globales personalizados aquí */
 /* body {

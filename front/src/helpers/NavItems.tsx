@@ -2,11 +2,11 @@
 
 enum PATHROUTES {
   HOME = '/',
-  PRODUCTS = 'Products',
-  ABOUT = 'About',
-  CONTACT = 'Contact',
-  CART = 'Cart',
-  DASHBOARD = 'Dashboard',
+  PRODUCTS = '/products',
+  ABOUT = '/about',
+  CONTACT = '/contact',
+  CART = '/cart',
+  DASHBOARD = '/dashboard',
 }
 
 export const NavItems = [
