@@ -6,15 +6,22 @@ import {
   registerformValidatorSchema,
 } from '@/validators/registerSchema';
 import { useFormik } from 'formik';
+import { registerUser } from '@/services/auth.services';
 import React from 'react';
 
 function RegisterForm() {
+  // Configuración de Formik para manejar el formulario
   const formik = useFormik<RegisterFormValuesType>({
-    initialValues: registerFormInitialValues,
-    validationSchema: registerformValidatorSchema,
-    onSubmit: (values) => {
-      console.log('Registro exitoso', values);
-      // Aquí iría la función de registro (ej: signUp(values))
+    initialValues: registerFormInitialValues, // Valores iniciales del formulario
+    validationSchema: registerformValidatorSchema, // Usaremos Yup para validar
+
+    // El onSubmit con la Función de registro
+    onSubmit: async (values, { resetForm }) => {
+      const response = await registerUser(values);
+      alert('Registro exitoso');
+      console.log('Registro exitoso, respuesta del servidor:', response);
+      alert('Usuario registrado exitosamente');
+      resetForm();
     },
   });
 
@@ -133,34 +140,30 @@ function RegisterForm() {
         {/* First Name */}
         <div>
           <label
-            htmlFor='firstname'
+            htmlFor='name'
             className='block text-sm font-medium text-gray-700 mb-1'
           >
             Nombre
           </label>
           <input
-            id='firstname'
-            name='firstname'
+            id='name'
+            name='name'
             type='text'
             placeholder='Tu nombre'
             className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-400 ${
-              formik.touched.firstname && formik.errors.firstname
+              formik.touched.name && formik.errors.name
                 ? 'border-red-500 focus:ring-red-500'
                 : 'border-gray-300'
             }`}
-            value={formik.values.firstname}
+            value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             aria-invalid={
-              formik.touched.firstname && formik.errors.firstname
-                ? 'true'
-                : 'false'
+              formik.touched.name && formik.errors.name ? 'true' : 'false'
             }
           />
-          {formik.touched.firstname && formik.errors.firstname && (
-            <p className='mt-1 text-sm text-red-600'>
-              {formik.errors.firstname}
-            </p>
+          {formik.touched.name && formik.errors.name && (
+            <p className='mt-1 text-sm text-red-600'>{formik.errors.name}</p>
           )}
         </div>
 

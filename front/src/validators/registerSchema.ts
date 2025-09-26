@@ -1,21 +1,25 @@
 import * as Yup from 'yup';
 
-// Definir la interfaz para los datos del formulario de registro - register
+// Definimos la interfaz para los datos del formulario de registro - register
+// Definimos valores iniciales para los datos del formulario de registro
+// Definimos Esquema de validación para el formulario con YUP
+
+// interfaz para los datos del formulario de registro
 export interface RegisterFormValuesType {
   email: string;
   password: string;
   confirmPassword: string;
-  firstname: string;
+  name: string;
   address: string;
   phone: string;
 }
-// Definir valores iniciales para los datos del formulario de registro
 
+// valores iniciales para los datos del formulario de registro
 export const registerFormInitialValues: RegisterFormValuesType = {
   email: '',
   password: '',
   confirmPassword: '',
-  firstname: '',
+  name: '',
   address: '',
   phone: '',
 };
@@ -31,7 +35,7 @@ export const registerformValidatorSchema = Yup.object({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
     .required('La confirmación de la contraseña es obligatoria'),
-  firstname: Yup.string().required('El nombre es obligatorio'),
+  name: Yup.string().required('El nombre es obligatorio'),
   address: Yup.string().required('La dirección es obligatoria'),
   phone: Yup.string()
     .matches(/^[0-9]+$/, 'El teléfono debe ser numérico')

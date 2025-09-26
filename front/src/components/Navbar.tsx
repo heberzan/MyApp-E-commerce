@@ -1,9 +1,14 @@
 'use client';
-import { NavItems } from '@/helpers/NavItems'; // Importa el array de objetos NavItems
+import { useAuth } from '@/context/Authcontext'; // Importa el custom hook useAuth
+import { NavItems, PATHROUTES } from '@/helpers/NavItems'; // Importa el array de objetos NavItems
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; // Hook para obtener la ruta actual
 
 const Navbar = () => {
+  const { dataUser, logout } = useAuth(); // Usamos el custom hook useAuth para obtener dataUser de manera global
+
+  console.log('dataUser en Navbar:', dataUser); // Verifica si dataUser se está obteniendo correctamente
+
   const pathname = usePathname(); // Obtiene la ruta actual
 
   // Función para determinar si una ruta es activa
@@ -13,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='bg-gray-800 text-white p-4 shadow-md'>
+    <nav className='bg-gray-900 text-white p-4 shadow-md'>
       <div className='container mx-auto flex justify-between items-center'>
         {/* Logo */}
         <Link
@@ -48,6 +53,28 @@ const Navbar = () => {
             );
           })}
         </ul>
+        {/* Inicio y cierre de sesión */}
+        {dataUser?.user ? (
+          <div className='flex items-center space-x-4'>
+            <div className='text-right'>
+              <p className='text-sm text-gray-300'>Bienvenido</p>
+              <h3 className='text-md font-medium'>{dataUser.user.name}</h3>
+            </div>
+            <button
+              onClick={() => logout()}
+              className='px-2 py-1 bg-red-600 hover:bg-red-700 text-white font-medium rounded transition-colors duration-200'
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        ) : (
+          <Link
+            href={PATHROUTES.LOGIN}
+            className='text-gray-300 hover:text-white font-medium transition-colors duration-200'
+          >
+            Iniciar sesión
+          </Link>
+        )}
       </div>
     </nav>
   );
@@ -55,7 +82,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-// Antes, el código tenía enlaces de navegación codificados directamente en el componente Navbar. Ahora, utiliza un array de objetos NavItems para generar dinámicamente los enlaces de navegación. Esto mejora la mantenibilidad y escalabilidad del código al centralizar la gestión de las rutas de navegación en un solo lugar.
+// Antes, el código tenía enlaces de navegación codificados directamente en el componente Navbar. Ahora, utilizamos un array de objetos NavItems para generar dinámicamente los enlaces de navegación. Esto mejora la mantenibilidad y escalabilidad del código al centralizar la gestión de las rutas de navegación en un solo lugar.
 {
   /* <Link href={NavItems.HOME} className='text-gray-300 hover:text-white'>
             Home
