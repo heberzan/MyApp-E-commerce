@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import { IProduct } from '@/types/index';
 import { getProductById } from '@/services/products.services';
 import Image from 'next/image';
+import { useCart } from '@/context/CartContext';
 
 const ProductDetail = () => {
   const params = useParams(); // Extraer productId desde la URL, ejemplo: http://localhost:3000/product/1
-
-  const [product, setProduct] = useState<IProduct | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { addtoCart } = useCart(); // Usar el contexto global del carrito de compras para agregar productos al carrito
+  const [productData, setProductData] = useState<IProduct | null>(null); // Estado para almacenar los datos del producto
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
 
   // Extraer productId desde la URL
   const productId = params.productId as string; // Asegurarse de que es una cadena
@@ -20,15 +21,15 @@ const ProductDetail = () => {
     // Efecto para cargar el producto al montar el componente o cambiar productId
     const fetchProduct = async () => {
       try {
-        setLoading(true);
-        setError(null);
+        setLoading(true); // Iniciar carga
+        setError(null); // Resetear error
 
         if (!productId) {
           throw new Error('ID del producto no proporcionado');
         }
 
         const productData = await getProductById(productId);
-        setProduct(productData);
+        setProductData(productData);
       } catch (err) {
         console.error('Error al cargar el producto:', err);
         setError(
@@ -66,7 +67,7 @@ const ProductDetail = () => {
   }
 
   // Si no hay producto, mostrar mensaje
-  if (!product) {
+  if (!productData) {
     return (
       <div className='min-h-screen flex items-center justify-center bg-gray-50'>
         <p className='text-lg text-gray-600'>Producto no encontrado.</p>
@@ -74,12 +75,21 @@ const ProductDetail = () => {
     );
   }
 
+  // Función para manejar el clic en "Agregar al carrito"
+  const handleAddToCart = () => {
+    console.log('Agregando al carrito...:', productData);
+
+    if (productData) {
+      addtoCart(productData); // Usamos el método del contexto para agregar el producto al carrito
+    }
+  };
+
   // ✅ Renderizar el detalle del producto (ahora con los campos correctos)
   return (
     <div className='max-w-4xl mx-auto px-4 py-12'>
       {/* Encabezado */}
       <div className='text-center mb-12'>
-        <h1 className='text-4xl font-bold text-gray-800'>{product.name}</h1>
+        <h1 className='text-4xl font-bold text-gray-800'>{productData.name}</h1>
         <p className='mt-4 text-lg text-gray-600'>Detalles del producto</p>
       </div>
 
@@ -88,8 +98,8 @@ const ProductDetail = () => {
         {/* Imagen */}
         <div className='flex justify-center'>
           <Image
-            src={product.image}
-            alt={product.name}
+            src={productData.image}
+            alt={productData.name}
             width={400}
             height={400}
             className='rounded-xl shadow-lg object-cover max-w-full h-auto'
@@ -108,7 +118,7 @@ const ProductDetail = () => {
               Descripción
             </h2>
             <p className='text-gray-700 leading-relaxed'>
-              {product.description}
+              {productData.description}
             </p>
           </div>
 
@@ -116,7 +126,7 @@ const ProductDetail = () => {
           <div>
             <h3 className='text-xl font-medium text-gray-800 mb-2'>Precio</h3>
             <p className='text-3xl font-bold text-blue-600'>
-              ${product.price.toFixed(2)}
+              ${productData.price.toFixed(2)}
             </p>
           </div>
 
@@ -127,13 +137,13 @@ const ProductDetail = () => {
             </h3>
             <span
               className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
-                product.stock > 0
+                productData.stock > 0
                   ? 'bg-green-100 text-green-800'
                   : 'bg-red-100 text-red-800'
               }`}
             >
-              {product.stock > 0
-                ? `${product.stock} unidades disponibles`
+              {productData.stock > 0
+                ? `${productData.stock} unidades disponibles`
                 : 'Agotado'}
             </span>
           </div>
@@ -144,7 +154,7 @@ const ProductDetail = () => {
               ID del Producto
             </h3>
             <code className='bg-gray-100 px-4 py-2 rounded text-sm text-gray-700'>
-              {product.id}
+              {productData.id}
             </code>
           </div>
 
@@ -154,7 +164,7 @@ const ProductDetail = () => {
               Categoría
             </h3>
             <span className='inline-block bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm'>
-              ID: {product.categoryId}
+              ID: {productData.categoryId}
             </span>
             <p className='text-sm text-gray-500 mt-1'>
               *(Para ver el nombre de la categoría, conecta con tu API de
@@ -164,14 +174,15 @@ const ProductDetail = () => {
 
           {/* Botón CTA */}
           <button
-            disabled={product.stock === 0}
+            onClick={handleAddToCart}
+            disabled={productData.stock === 0}
             className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors duration-200 shadow-md ${
-              product.stock > 0
+              productData.stock > 0
                 ? 'bg-blue-600 hover:bg-blue-700 text-white'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            {product.stock > 0 ? 'Agregar al carrito' : 'Agotado'}
+            {productData.stock > 0 ? 'Agregar al carrito' : 'Agotado'}
           </button>
         </div>
       </div>

@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/context/Authcontext';
+import { CartProvider } from '@/context/CartContext';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,11 +33,13 @@ export default function RootLayout({
       >
         {/* Aquí envolvemos la aplicación con el AuthProvider para que todos los componentes tengan acceso al contexto de autenticación */}
         <AuthProvider>
-          <>
-            <Navbar />
-            {children}
-            <Footer />
-          </>
+          <CartProvider>
+            <>
+              <Navbar />
+              {children}
+              <Footer />
+            </>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
