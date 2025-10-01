@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { IProduct } from '@/types/index';
+import { IProduct } from '@/types/product.interface';
 import { getProductById } from '@/services/products.services';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';

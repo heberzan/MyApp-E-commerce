@@ -3,6 +3,7 @@
 import { userSessionInterface } from '@/types/userSession.interface';
 import { createContext, useContext, useEffect } from 'react';
 import { useState } from 'react';
+import { useCart } from './CartContext';
 
 // Definimos la interfaz para el contexto de autenticación
 
@@ -27,6 +28,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [dataUser, setDataUser] = useState<userSessionInterface | null>(null);
+  const { clearCart } = useCart(); //
 
   // Logica que controle con userEffect si el usuario está logueado o no, y que actualice el estado dataUser en consecuencia
 
@@ -52,6 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Métodos disponibles logout que es el faltante.
   const logout = () => {
     setDataUser(null); // Reseteamos el estado dataUser a null (el usuario cierra sesión)
+    clearCart(); // Limpiamos el carrito
     if (typeof window !== 'undefined' && window.localStorage) {
       // Verificamos que estamos en el navegador y que localStorage está disponible
       localStorage.removeItem('userSession'); // Eliminamos los datos del usuario del localStorage
@@ -59,6 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
+    // El AuthContext.Provider envuelve toda la aplicación para que todos los componentes tengan acceso al contexto de autenticación
     <AuthContext.Provider value={{ dataUser, setDataUser, logout }}>
       {children}
     </AuthContext.Provider>
@@ -69,6 +73,3 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext); // Retornamos el contexto de autenticación
 };
-
-// El AuthProvider es un componente que envuelve a otros componentes y les proporciona acceso al contexto de autenticación
-// El AuthProvider se usa en el archivo layout.tsx para envolver toda la aplicación y que todos los componentes tengan acceso al contexto de autenticación

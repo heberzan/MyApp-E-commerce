@@ -1,6 +1,6 @@
 'use client';
 
-import { IProduct } from '@/types';
+import { IProduct } from '@/types/product.interface';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useAuth } from './Authcontext';
 

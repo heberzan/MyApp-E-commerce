@@ -1,7 +1,9 @@
-import { IProduct } from '../types/index';
+const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
+import { IProduct } from '../types/product.interface';
 const getAllProducts = async () => {
   try {
-    const response = await fetch('http://localhost:3004/products', {
+    const response = await fetch(`${apiURL}/products`, {
       method: 'GET',
     });
     const products: IProduct[] = await response.json();

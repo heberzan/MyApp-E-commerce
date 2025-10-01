@@ -1,4 +1,4 @@
-import { IProduct } from '@/types';
+import { IProduct } from '@/types/product.interface';
 import Image from 'next/image';
 
 const Card: React.FC<IProduct> = ({

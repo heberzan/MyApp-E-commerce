@@ -57,6 +57,12 @@ const CartView = () => {
       ? (getItemCount() as unknown as number)
       : 0;
 
+  // Calcular el precio total del carrito
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + (item.price || 0),
+    0
+  );
+
   // Mostrar carga si el carrito está en proceso de carga
 
   return (
@@ -145,9 +151,7 @@ const CartView = () => {
         <div>
           <p className='text-lg font-bold text-gray-800'>Total del Carrito:</p>
           <p className='text-2xl font-bold text-blue-600 drop-shadow-sm'>
-            {itemCount}
-            {''}
-            {itemCount === 1 ? ' producto' : ' productos'}
+            {totalPrice}
           </p>
         </div>
         <div className='flex space-x-3'>
