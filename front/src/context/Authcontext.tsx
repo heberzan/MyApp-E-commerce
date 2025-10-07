@@ -5,71 +5,63 @@ import { createContext, useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { useCart } from './CartContext';
 
-// Definimos la interfaz para el contexto de autenticación
-
-// Esto es una interface que define los valores que tendrá el contexto de autenticación
 export interface AuthContextProps {
-  // Esto significa que el contexto de autenticación tendrá estas propiedades
-  dataUser: userSessionInterface | null; // TODO crear una interfaz para el usuario loggeado: USER SESSION
+  dataUser: userSessionInterface | null;
+  loading: boolean;
   setDataUser: (dataUser: userSessionInterface | null) => void;
   logout: () => void;
 }
-
-// Esto SI ES la creación del context y la definición de sus valores iniciales
+interface AuthProviderProps {
+  children: React.ReactElement;
+}
+// Creación y definición de valores iniciales del contexto
 export const AuthContext = createContext<AuthContextProps>({
   dataUser: null,
   setDataUser: () => {},
   logout: () => {},
+  loading: false,
 });
-
-interface AuthProviderProps {
-  children: React.ReactElement;
-}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [dataUser, setDataUser] = useState<userSessionInterface | null>(null);
-  const { clearCart } = useCart(); //
+  const [loading, setLoading] = useState(true);
+  const { clearCart } = useCart();
 
-  // Logica que controle con userEffect si el usuario está logueado o no, y que actualice el estado dataUser en consecuencia
-
+  // Usuario logueado?, y guardamos
   useEffect(() => {
-    // Esto se ejecuta cuando cambia dataUser
     if (dataUser) {
-      // Si dataUser tiene un valor (el usuario está logueado)
-      localStorage.setItem('userSession', JSON.stringify(dataUser)); // Guardamos los datos del usuario en el localStorage (datos planos, solo texto, el localStorage no almacena estructuras de datos)
+      localStorage.setItem('userSession', JSON.stringify(dataUser));
     }
-  }, [dataUser]); // Y esto se resetea cuando el usuario cierra sesión
+  }, [dataUser]);
 
+  // Cargamos los datos del usuario
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
-      // Verificamos que estamos en el navegador y que localStorage está disponible
-      const dataUser = localStorage.getItem('userSession'); // Obtenemos los datos del usuario del localStorage
+      const dataUser = localStorage.getItem('userSession');
       if (dataUser) {
-        // Si hay datos del usuario en el localStorage
-        setDataUser(JSON.parse(dataUser)); // Actualizamos el estado dataUser con los datos del usuario y (parseamos el string a un objeto)
+        setDataUser(JSON.parse(dataUser));
       }
+      setLoading(false);
     }
   }, []);
 
-  // Métodos disponibles logout que es el faltante.
   const logout = () => {
-    setDataUser(null); // Reseteamos el estado dataUser a null (el usuario cierra sesión)
-    clearCart(); // Limpiamos el carrito
+    setDataUser(null);
+    clearCart();
     if (typeof window !== 'undefined' && window.localStorage) {
-      // Verificamos que estamos en el navegador y que localStorage está disponible
-      localStorage.removeItem('userSession'); // Eliminamos los datos del usuario del localStorage
+      localStorage.removeItem('userSession');
     }
   };
 
   return (
-    // El AuthContext.Provider envuelve toda la aplicación para que todos los componentes tengan acceso al contexto de autenticación
-    <AuthContext.Provider value={{ dataUser, setDataUser, logout }}>
+    // Enviamos el contexto
+    <AuthContext.Provider value={{ dataUser, loading, setDataUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook para usar el contexto de autenticación
+// Exportamos el custom hook para usar el contexto de autenticación
 export const useAuth = () => {
-  return useContext(AuthContext); // Retornamos el contexto de autenticación
+  return useContext(AuthContext);
 };

@@ -1,21 +1,40 @@
 'use client';
-import { useAuth } from '@/context/Authcontext'; // Importa el custom hook useAuth
-import { NavItems, PATHROUTES } from '@/helpers/NavItems'; // Importa el array de objetos NavItems
+import { useAuth } from '@/context/Authcontext';
+import {
+  PUBLIC_NAV_ITEMS,
+  USER_NAV_ITEMS,
+  PATHROUTES,
+} from '@/helpers/NavItems';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // Hook para obtener la ruta actual
 
 const Navbar = () => {
-  const { dataUser, logout } = useAuth(); // Usamos el custom hook useAuth para obtener dataUser de manera global
+  const { dataUser, logout, loading } = useAuth();
 
-  console.log('dataUser en Navbar:', dataUser); // Verifica si dataUser se está obteniendo correctamente
-
-  const pathname = usePathname(); // Obtiene la ruta actual
-
-  // Función para determinar si una ruta es activa
+  // Experiencia de usuario
+  const pathname = usePathname(); // Ruta actual
   const isActive = (currentPath: string, route: string) => {
     if (route === '/') return currentPath === '/';
     return currentPath === route || currentPath.startsWith(route + '/');
   };
+
+  // Mientras carga, no renderizo el estado de autenticación
+  if (loading) {
+    return (
+      <nav className='bg-gray-900 text-white p-4 shadow-md'>
+        <div className='container mx-auto flex justify-between items-center'>
+          <div className='text-lg font-bold'>MyApp E-commerce</div>
+          <div className='h-6 w-32 bg-gray-800 rounded-full relative overflow-hidden'>
+            <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_1.5s_infinite]'></div>
+          </div>
+          <div className='h-6 w-24 bg-gray-800 rounded animate-pulse'></div>
+        </div>
+      </nav>
+    );
+  }
+
+  // Determina qué items mostrar
+  const NavItems = [...(!dataUser?.user ? PUBLIC_NAV_ITEMS : USER_NAV_ITEMS)];
 
   return (
     <nav className='bg-gray-900 text-white p-4 shadow-md'>
@@ -53,12 +72,12 @@ const Navbar = () => {
             );
           })}
         </ul>
-        {/* Inicio y cierre de sesión */}
+        {/* Usuario y cierre de sesión */}
         {dataUser?.user ? (
           <div className='flex items-center space-x-4'>
-            <div className='text-right'>
-              <p className='text-sm text-gray-300'>Bienvenido</p>
-              <h3 className='text-md font-medium'>{dataUser.user.name}</h3>
+            <div className='text-right flex items-center space-x-2'>
+              <span className='text-sm text-gray-300'>Hola, bienvenid@</span>
+              <span className='text-md font-medium'>{dataUser.user.name}</span>
             </div>
             <button
               onClick={() => logout()}
@@ -70,9 +89,9 @@ const Navbar = () => {
         ) : (
           <Link
             href={PATHROUTES.LOGIN}
-            className='text-gray-300 hover:text-white font-medium transition-colors duration-200'
+            className={`px-3 py-2 rounded-md text-sm font-medium transition duration-200 text-gray-300 hover:text-white hover:bg-gray-700`}
           >
-            Iniciar sesión
+            Iniciar Sesión
           </Link>
         )}
       </div>
@@ -81,28 +100,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// Antes, el código tenía enlaces de navegación codificados directamente en el componente Navbar. Ahora, utilizamos un array de objetos NavItems para generar dinámicamente los enlaces de navegación. Esto mejora la mantenibilidad y escalabilidad del código al centralizar la gestión de las rutas de navegación en un solo lugar.
-{
-  /* <Link href={NavItems.HOME} className='text-gray-300 hover:text-white'>
-            Home
-          </Link>
-          <Link
-            href={NavItems.ABOUT}
-            className='text-gray-300 hover:text-white'
-          >
-            About
-          </Link>
-          <a href={NavItems.CONTACT} className='text-gray-300 hover:text-white'>
-            Contact
-          </a>
-          <Link href={NavItems.CART} className='text-gray-300 hover:text-white'>
-            Cart
-          </Link>
-          <Link
-            href={NavItems.DASHBOARD}
-            className='text-gray-300 hover:text-white'
-          >
-            Dashboard
-          </Link> */
-}

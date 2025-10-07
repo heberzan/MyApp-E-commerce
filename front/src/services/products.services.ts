@@ -1,6 +1,5 @@
-const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
 import { IProduct } from '../types/product.interface';
+const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const getAllProducts = async () => {
   try {
     const response = await fetch(`${apiURL}/products`, {
@@ -9,7 +8,7 @@ const getAllProducts = async () => {
     const products: IProduct[] = await response.json();
     return products;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error al obtener los productos:', error);
     return [];
   }
 };

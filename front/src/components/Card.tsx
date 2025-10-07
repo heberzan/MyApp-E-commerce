@@ -1,3 +1,4 @@
+// components/Card.tsx
 import { IProduct } from '@/types/product.interface';
 import Image from 'next/image';
 
@@ -9,28 +10,30 @@ const Card: React.FC<IProduct> = ({
   stock,
   categoryId,
 }) => {
-  // Elimina espacios en blanco al final de la URL
   const safeImage = image?.trim() || '';
 
   return (
-    <div>
-      <div className='relative w-72 h-72 overflow-hidden'>
+    <div className='bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 border-2 border-transparent group-hover:border-blue-500'>
+      <div className='relative w-full h-70 overflow-hidden'>
         <Image
           src={safeImage}
           alt={`Imagen de producto: ${name}`}
           width={300}
           height={300}
-          priority // Para pre-cargar la imagen, es decir, cargando de forma prioritaria
-          className='object-cover'
-          placeholder='empty' // Opcional: si quieres un placeholder
+          className='object-cover w-full h-full transition-transform duration-500 group-hover:scale-105'
+          placeholder='empty'
         />
       </div>
-      <div className='mt-3'>
-        <h2 className='text-xl font-bold'>{name}</h2>
-        <p className='text-gray-700'>Precio: ${price}</p>
-        <p className='text-sm text-gray-600'>{description}</p>
-        <p className='text-sm'>Cantidad: {stock}</p>
-        <p className='text-sm'>Categoría: {categoryId}</p>
+      <div className='p-4'>
+        <h2 className='text-xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors'>
+          {name}
+        </h2>
+        <p className='text-gray-700 font-semibold'>Precio: ${price}</p>
+        <p className='text-sm text-gray-600 line-clamp-2 mt-1'>{description}</p>
+        <div className='mt-2 flex justify-between text-sm text-gray-500'>
+          <span>Stock: {stock}</span>
+          <span>Cat. {categoryId}</span>
+        </div>
       </div>
     </div>
   );

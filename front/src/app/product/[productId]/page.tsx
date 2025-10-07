@@ -9,13 +9,13 @@ import { useCart } from '@/context/CartContext';
 
 const ProductDetail = () => {
   const params = useParams(); // Extraer productId desde la URL, ejemplo: http://localhost:3000/product/1
-  const { addtoCart } = useCart(); // Usar el contexto global del carrito de compras para agregar productos al carrito
-  const [productData, setProductData] = useState<IProduct | null>(null); // Estado para almacenar los datos del producto
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga
-  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+  const { addtoCart } = useCart();
+  const [productData, setProductData] = useState<IProduct | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Extraer productId desde la URL
-  const productId = params.productId as string; // Asegurarse de que es una cadena
+  const productId = params.productId as string;
 
   useEffect(() => {
     // Efecto para cargar el producto al montar el componente o cambiar productId
@@ -84,7 +84,7 @@ const ProductDetail = () => {
     }
   };
 
-  // ✅ Renderizar el detalle del producto (ahora con los campos correctos)
+  // Detalle del producto
   return (
     <div className='max-w-4xl mx-auto px-4 py-12'>
       {/* Encabezado */}
@@ -158,7 +158,7 @@ const ProductDetail = () => {
             </code>
           </div>
 
-          {/* Categoría (opcional: puedes mostrarla si tienes un mapa de categorías) */}
+          {/* Categoría */}
           <div>
             <h3 className='text-xl font-medium text-gray-800 mb-2'>
               Categoría
@@ -191,46 +191,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-
-/////////////////////////////////////////////////////////////////
-
-{
-  /* 'use client';
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { IProduct } from '@/types/index';
-import { getProductById } from '@/services/protucts.services';
-
-const ProductDetail = () => {
-  // Llamar al back para traer el detalle del producto con el id que viene en params
-  // y renderizar el componente que muestra el detalle
-  const params = useParams(); // 
-
-  const [productdata, setProductdata] = useState<IProduct>(); // Estado para almacenar los datos del producto
-
-  useEffect(() => {
-    // Lógica para obtener el detalle del producto usando params.productId
-    // y actualizar el estado con setProductdata
-    console.log('El id del producto es:', params.productId);
-
-    const fetchProductById = async () => {
-      const product = await getProductById(params.productId as string);
-      setProductdata(product as IProduct);
-    };
-
-    fetchProductById();
-  }, [params.productId]);
-
-  return (
-    <div>
-      // Aqui se renderiza el componente que se va a mostrar
-      {productdata ? (
-        <div>
-    </div> 
-      ) : (
-        <p>Cargando...</p>
-      )}
-    </div>
-  );
-}; */
-}

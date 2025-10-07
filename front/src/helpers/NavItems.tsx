@@ -5,18 +5,21 @@ export enum PATHROUTES {
   DASHBOARD = '/dashboard',
   CART = '/cart',
   LOGIN = '/login',
+  LOGOUT = '/logout',
   REGISTER = '/register',
   CHECKOUT = '/checkout',
   ABOUT = '/about',
 }
 
-export const NavItems = [
-  { name: 'Home', route: PATHROUTES.HOME },
-  { name: 'Dashboard', route: PATHROUTES.DASHBOARD },
-  { name: 'Cart', route: PATHROUTES.CART },
-  { name: 'About', route: PATHROUTES.ABOUT },
-  { name: 'Login', route: PATHROUTES.LOGIN },
-  { name: 'Register', route: PATHROUTES.REGISTER },
-  { name: 'Checkout', route: PATHROUTES.CHECKOUT },
+export const PUBLIC_NAV_ITEMS = [
+  { name: 'Productos', route: PATHROUTES.HOME },
+  { name: 'Crear Cuenta', route: PATHROUTES.REGISTER },
+  { name: 'Acerca de', route: PATHROUTES.ABOUT },
 ];
-// Cada objeto en el array NavItems contiene un nombre y una ruta correspondiente, facilitando la gestión de la navegación en la interfaz de usuario.
+
+export const USER_NAV_ITEMS = [
+  { name: 'Productos', route: PATHROUTES.HOME },
+  { name: 'Mi Cuenta', route: PATHROUTES.DASHBOARD },
+  { name: 'Mi Carrito', route: PATHROUTES.CART },
+  { name: 'Finalizar compra', route: PATHROUTES.CHECKOUT },
+];

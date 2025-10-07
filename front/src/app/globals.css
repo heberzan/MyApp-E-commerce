@@ -5,17 +5,18 @@
 
 @import 'tailwindcss';
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 @theme {
   --color-primary: #19183b; /*azul oscuro profundo*/
   --color-secondary: #708993; /*gris azulado suave */
   --color-accent: #a1c2bd; /* verde azulado */
   --color-background: #e7f2ef; /* blanco verdoso */
 }
-
-/* Puedes agregar estilos globales personalizados aquí */
-/* body {
-  @apply bg-gray-100 text-gray-900;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-} */

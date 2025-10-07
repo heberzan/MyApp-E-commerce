@@ -6,6 +6,7 @@ import { PATHROUTES } from '@/helpers/NavItems';
 import Image from 'next/image';
 import { useAuth } from '@/context/Authcontext';
 import { createOrder } from '@/services/orders.services';
+import Swal from 'sweetalert2';
 
 const CartView = () => {
   const {
@@ -20,17 +21,35 @@ const CartView = () => {
     loadingCart,
   } = useCart();
 
-  const { dataUser } = useAuth(); // Usamos el contexto de autenticación para obtener los datos del usuario y saber si está logueado
+  const { dataUser } = useAuth();
 
   const handleCheckout = async () => {
     // Validaciones
     if (!dataUser?.user?.id) {
-      alert('Debes iniciar sesión para continuar');
+      // alert('Debes iniciar sesión para continuar');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Advertencia',
+        text: 'Debes iniciar sesión para continuar',
+        confirmButtonText: 'Continuar',
+        timer: 6000,
+        timerProgressBar: true,
+      });
+
       return;
     }
 
     if (cartItems.length === 0) {
-      alert('Tu carrito está vacío');
+      // alert('Tu carrito está vacío');
+      Swal.fire({
+        icon: 'info',
+        title: 'Carrito vacío',
+        text: 'Tu carrito está vacío. Agrega productos para continuar.',
+        confirmButtonText: 'Continuar',
+        timer: 6000,
+        timerProgressBar: true,
+      });
+
       return;
     }
 
@@ -43,7 +62,15 @@ const CartView = () => {
     } catch (error) {
       console.error('Error al crear la orden:', error);
     }
-    alert('Procediendo al pago...');
+    Swal.fire({
+      icon: 'success',
+      title: '¡Gracias por tu compra!',
+      text: 'Tu orden ha sido creada exitosamente.',
+      confirmButtonText: 'Continuar',
+      timer: 6000,
+      timerProgressBar: true,
+    });
+    // alert('Procediendo al pago...');
   };
 
   // Función para truncar texto largo de la descripción
