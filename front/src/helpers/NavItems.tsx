@@ -7,7 +7,6 @@ export enum PATHROUTES {
   LOGIN = '/login',
   LOGOUT = '/logout',
   REGISTER = '/register',
-  CHECKOUT = '/checkout',
   ABOUT = '/about',
 }
 
@@ -21,5 +20,4 @@ export const USER_NAV_ITEMS = [
   { name: 'Productos', route: PATHROUTES.HOME },
   { name: 'Mi Cuenta', route: PATHROUTES.DASHBOARD },
   { name: 'Mi Carrito', route: PATHROUTES.CART },
-  { name: 'Finalizar compra', route: PATHROUTES.CHECKOUT },
 ];

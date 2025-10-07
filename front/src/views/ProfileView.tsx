@@ -165,27 +165,6 @@ const ProfileView = () => {
               </div>
             </div>
           </div>
-
-          {/* Actividad / Estadísticas (opcional) */}
-          <div className='bg-white rounded-xl shadow-md p-6'>
-            <h3 className='text-lg font-semibold text-gray-800 mb-4'>
-              Actividad Reciente
-            </h3>
-            <div className='space-y-4'>
-              <div className='flex justify-between'>
-                <span className='text-gray-700'>Órdenes realizadas</span>
-                <span className='font-medium text-gray-900'>3</span>
-              </div>
-              <div className='flex justify-between'>
-                <span className='text-gray-700'>Productos en carrito</span>
-                <span className='font-medium text-gray-900'>2</span>
-              </div>
-              <div className='flex justify-between'>
-                <span className='text-gray-700'>Última compra</span>
-                <span className='font-medium text-gray-900'>22/05/2025</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Botón de edición (opcional) */}
