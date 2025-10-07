@@ -6,13 +6,16 @@ import { IProduct } from '@/types/product.interface';
 import { getProductById } from '@/services/products.services';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/Authcontext';
+import Swal from 'sweetalert2';
 
 const ProductDetail = () => {
-  const params = useParams(); // Extraer productId desde la URL, ejemplo: http://localhost:3000/product/1
+  const params = useParams();
   const { addtoCart } = useCart();
   const [productData, setProductData] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { dataUser } = useAuth();
 
   // Extraer productId desde la URL
   const productId = params.productId as string;
@@ -21,8 +24,8 @@ const ProductDetail = () => {
     // Efecto para cargar el producto al montar el componente o cambiar productId
     const fetchProduct = async () => {
       try {
-        setLoading(true); // Iniciar carga
-        setError(null); // Resetear error
+        setLoading(true);
+        setError(null);
 
         if (!productId) {
           throw new Error('ID del producto no proporcionado');
@@ -68,19 +71,41 @@ const ProductDetail = () => {
 
   // Si no hay producto, mostrar mensaje
   if (!productData) {
-    return (
-      <div className='min-h-screen flex items-center justify-center bg-gray-50'>
-        <p className='text-lg text-gray-600'>Producto no encontrado.</p>
-      </div>
-    );
+    Swal.fire({
+      icon: 'info',
+      title: 'Producto no encontrado',
+      text: 'El producto que buscas no existe.',
+      confirmButtonText: 'Aceptar',
+      timer: 6000,
+      timerProgressBar: true,
+    }).then(() => {
+      window.location.href = '/';
+    });
+    return null;
   }
 
   // Función para manejar el clic en "Agregar al carrito"
   const handleAddToCart = () => {
-    console.log('Agregando al carrito...:', productData);
-
+    if (!dataUser) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Advertencia',
+        text: 'Debes iniciar sesión para agregar productos al carrito',
+        showDenyButton: true,
+        denyButtonText: 'Registrarse',
+        confirmButtonText: 'Iniciar sesión',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/login';
+        } else if (result.isDenied) {
+          window.location.href = '/register';
+        }
+      });
+      return;
+    }
     if (productData) {
-      addtoCart(productData); // Usamos el método del contexto para agregar el producto al carrito
+      addtoCart(productData);
     }
   };
 

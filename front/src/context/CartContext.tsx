@@ -2,7 +2,7 @@
 
 import { IProduct } from '@/types/product.interface';
 import { createContext, useState, useEffect, useContext } from 'react';
-import { useAuth } from './Authcontext';
+import Swal from 'sweetalert2';
 
 // Definimos la interfaz para el contexto de carrito de compras
 interface CartContextProps {
@@ -34,11 +34,9 @@ const CartContext = createContext<CartContextProps>({
 });
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const { dataUser } = useAuth();
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
-
-  // Simula la carga de los productos del carrito (ej: desde localStorage o API)
   const [loadingCart, setLoadingCart] = useState(true);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoadingCart(false);
@@ -66,29 +64,59 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, []);
 
   const addtoCart = (product: IProduct) => {
-    if (!dataUser) {
-      alert('Debes iniciar sesión para agregar productos al carrito');
-      return;
-    }
-
     const productExists = cartItems.some((item) => item.id === product.id);
     if (productExists) {
-      alert('El producto ya está en el carrito');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Advertencia',
+        text: 'El producto ya está en el carrito',
+        confirmButtonText: 'Continuar',
+        timer: 6000,
+        timerProgressBar: true,
+      });
+      // alert('El producto ya está en el carrito');
       return;
     }
     setCartItems((prevItems) => [...prevItems, product]);
-    alert('Producto agregado al carrito');
+    Swal.fire({
+      icon: 'success',
+      title: 'Producto agregado',
+      text: 'El producto ha sido agregado al carrito correctamente.',
+      confirmButtonText: 'Continuar',
+      timer: 6000,
+      timerProgressBar: true,
+    }).then(() => {
+      window.location.href = '/cart';
+    });
+    // alert('Producto agregado al carrito');
   };
 
   const removeFromCart = (productId: number) => {
     if (cartItems.length === 1) {
       clearCart();
-      console.log('Producto eliminado del carrito', productId);
+      Swal.fire({
+        icon: 'info',
+        title: 'Carrito vacío',
+        text: 'Tu carrito está vacío. Agrega productos para continuar.',
+        confirmButtonText: 'Continuar',
+        timer: 6000,
+        timerProgressBar: true,
+      });
       return;
     }
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId)
     );
+    Swal.fire({
+      icon: 'success',
+      title: 'Producto eliminado',
+      text: 'El producto ha sido eliminado del carrito correctamente.',
+      confirmButtonText: 'Continuar',
+      timer: 6000,
+      timerProgressBar: true,
+    }).then(() => {
+      window.location.href = '/cart';
+    });
   };
 
   const isInCart = (productId: number) => {
@@ -108,6 +136,14 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem('cartItems');
     }
+    Swal.fire({
+      icon: 'info',
+      title: 'Carrito vacío',
+      text: 'Tu carrito está vacío. Agrega productos para continuar.',
+      confirmButtonText: 'Continuar',
+      timer: 6000,
+      timerProgressBar: true,
+    });
   };
 
   // Proveedor de metodos del contexto

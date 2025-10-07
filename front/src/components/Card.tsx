@@ -1,4 +1,3 @@
-// components/Card.tsx
 import { IProduct } from '@/types/product.interface';
 import Image from 'next/image';
 
@@ -20,8 +19,10 @@ const Card: React.FC<IProduct> = ({
           alt={`Imagen de producto: ${name}`}
           width={300}
           height={300}
+          priority={true}
           className='object-cover w-full h-full transition-transform duration-500 group-hover:scale-105'
           placeholder='empty'
+          style={{ width: '100%', height: 'auto' }} // Evita distorsiones
         />
       </div>
       <div className='p-4'>

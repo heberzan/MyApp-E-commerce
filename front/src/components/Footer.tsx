@@ -50,29 +50,14 @@ const Footer = () => {
           <div>
             <h4 className='font-semibold mb-4'>Soporte</h4>
             <ul className='space-y-2 text-sm  text-gray-400'>
-              <li>
-                <Link
-                  href=''
-                  className='text-gray-400 hover:text-white transition'
-                >
-                  Preguntas Frecuentes
-                </Link>
+              <li className='text-gray-400 hover:text-white transition cursor-pointer'>
+                Preguntas Frecuentes
               </li>
-              <li>
-                <Link
-                  href=''
-                  className='text-gray-400 hover:text-white transition'
-                >
-                  Envíos y Devoluciones
-                </Link>
+              <li className='text-gray-400 hover:text-white transition cursor-pointer'>
+                Envíos y Devoluciones
               </li>
-              <li>
-                <Link
-                  href=''
-                  className='text-gray-400 hover:text-white transition'
-                >
-                  Términos y Condiciones
-                </Link>
+              <li className=' text-gray-400 hover:text-white transition cursor-pointer'>
+                Términos y Condiciones
               </li>
             </ul>
           </div>

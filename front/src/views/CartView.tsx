@@ -11,11 +11,9 @@ import Swal from 'sweetalert2';
 const CartView = () => {
   const {
     cartItems,
-    // addtoCart,
-    // isInCart,
     removeFromCart,
     clearCart,
-    // getTotal,
+    getTotal,
     getItemCount,
     getIdItems,
     loadingCart,
@@ -56,8 +54,8 @@ const CartView = () => {
     // Lógica para proceder al pago
     try {
       await createOrder(getIdItems(), dataUser?.token);
-      console.log('Orden creada', getIdItems());
-      console.log('Datos del usuario', dataUser);
+      // console.log('Orden creada', getIdItems());
+      // console.log('Datos del usuario', dataUser);
       clearCart();
     } catch (error) {
       console.error('Error al crear la orden:', error);
@@ -70,7 +68,7 @@ const CartView = () => {
       timer: 6000,
       timerProgressBar: true,
     });
-    // alert('Procediendo al pago...');
+    // alert('Orden creada exitosamente');
   };
 
   // Función para truncar texto largo de la descripción
@@ -85,10 +83,10 @@ const CartView = () => {
       : 0;
 
   // Calcular el precio total del carrito
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + (item.price || 0),
-    0
-  );
+  // const totalPrice = cartItems.reduce(
+  //   (acc, item) => acc + (item.price || 0),
+  //   0
+  // );
 
   // Mostrar carga si el carrito está en proceso de carga
 
@@ -178,7 +176,7 @@ const CartView = () => {
         <div>
           <p className='text-lg font-bold text-gray-800'>Total del Carrito:</p>
           <p className='text-2xl font-bold text-blue-600 drop-shadow-sm'>
-            {totalPrice}
+            {getTotal ? `$${getTotal()}` : '$0'}
           </p>
         </div>
         <div className='flex space-x-3'>
