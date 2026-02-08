@@ -21,7 +21,6 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cdn.computerhoy.com',
         pathname: '/sites/navi.axelspringer.es/public/media/image/**',
-        // El parámetro de búsqueda (como ?tf=1200x) no se incluye en pathname
       },
       {
         protocol: 'https',
@@ -32,6 +31,26 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'media.istockphoto.com',
         pathname: '/id/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'mac-center.com',
+        pathname: '/cdn/shop/files/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+        pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'co.tiendasishop.com',
+        pathname: '/cdn/shop/files/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'http2.mlstatic.com',
+        pathname: '/**',
       },
     ],
   },
