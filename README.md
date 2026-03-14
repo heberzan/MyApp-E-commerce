@@ -45,13 +45,14 @@ MyApp E-commerce es una aplicación web completa para la gestión de ventas en l
 ```bash
 Git • GitHub • ESLint • Prettier • Docker (opcional) • Vercel (deploy frontend)
 
+```
 ---
-
 ## 📦 Estructura del Proyecto
 
+```bash
 MyApp-E-commerce/
 │
-├── 📁 back/                     # API REST - Backend con Node.js + TypeORM
+├──  back/                     # API REST - Backend con Node.js + TypeORM
 │   ├── 📁 src/
 │   │   ├── 📁 config/           # Configuraciones: dataSource.ts, envs.ts
 │   │   ├── 📁 controllers/      # Lógica de endpoints: user, product, order
@@ -91,7 +92,7 @@ MyApp-E-commerce/
 │   │   ├── 📁 services/         # Conexión con API: auth, orders, products
 │   │   ├── 📁 types/            # Interfaces TypeScript: orders, products...
 │   │   ├── 📁 validators/       # Schemas Zod: loginSchema, registerSchema
-│   │   └── 📁 views/            # Componentes de vista: HomeView, CartView...
+│   │   └──  views/            # Componentes de vista: HomeView, CartView...
 │   ├── globals.css              # Estilos globales con Tailwind
 │   ├── tailwind.config.ts       # Configuración de Tailwind
 │   ├── next.config.ts           # Configuración de Next.js
@@ -101,3 +102,58 @@ MyApp-E-commerce/
 ├── .gitignore
 ├── README.md
 └── eslint.config.mjs            # Configuración de ESLint
+```
+---
+## ⚙️ Instalación y Configuración
+
+### 📋 Prerrequisitos
+- Node.js >= 18.x
+- PostgreSQL >= 14.x (o MongoDB si adaptas TypeORM)
+- Git
+
+### 🔧 Paso a paso
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/heberzan/MyApp-E-commerce.git
+cd MyApp-E-commerce
+
+# ==================================================
+# 🔹 CONFIGURACIÓN DEL BACKEND
+# ==================================================
+cd back
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Configurar variables de entorno
+cp .env.example .env
+# Edita .env con tus credenciales:
+# - DATABASE_URL=postgresql://user:pass@localhost:5432/myapp_db
+# - JWT_SECRET=tu_secreto_seguro
+# - PORT=3000
+
+# 4. Sincronizar base de datos (TypeORM)
+npm run build
+# O si tienes scripts de migración:
+# npm run migration:run
+
+# 5. Iniciar servidor en desarrollo
+npm run dev
+# El backend estará en: http://localhost:3000
+
+# ==================================================
+# 🔹 CONFIGURACIÓN DEL FRONTEND
+# ==================================================
+cd ../front
+
+# 6. Instalar dependencias
+npm install
+
+# 7. Configurar variables de entorno (opcional)
+# Crea .env.local si necesitas sobrescribir URLs:
+# NEXT_PUBLIC_API_URL=http://localhost:3000/api
+
+# 8. Iniciar aplicación en desarrollo
+npm run dev
+# El frontend estará en: http://localhost:3001 (o 5173 según config)
+```
