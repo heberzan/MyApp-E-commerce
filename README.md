@@ -157,3 +157,87 @@ npm install
 npm run dev
 # El frontend estará en: http://localhost:3001 (o 5173 según config)
 ```
+---
+## 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Para colaborar:
+
+1. Haz **fork** del repositorio
+
+2. Crea una rama para tu feature:
+   ```bash
+   git checkout -b feat/agregar-filtros-productos
+   ```
+3. Commit tus cambios con mensajes convencionales:
+```bash
+git commit -m "feat(cart): agregar persistencia en localStorage"
+   ```
+4. Push a tu rama:
+```bash
+git push origin feat/agregar-filtros-productos
+   ```
+5. Abre un Pull Request describiendo los cambios
+---
+### 📏 Convenciones de Commit
+```bash
+feat:     Nueva funcionalidad
+fix:      Corrección de bug
+docs:     Cambios en documentación
+style:    Cambios de formato (sin lógica)
+refactor: Mejora de código sin cambiar comportamiento
+test:     Agregar o corregir pruebas
+chore:    Tareas de mantenimiento (deps, config, etc.)
+```
+---
+## 👨‍ Autor
+
+**Heber Marzán** — Full Stack Developer
+
+🎓 Especialista en Salud Ocupacional & Ingeniero Industrial  
+🚀 Enfocado en soluciones limpias, escalables y tipo-safe
+
+- 🐙 GitHub: [@heberzan](https://github.com/heberzan) ↗
+-  LinkedIn: [Heber Marzán](https://linkedin.com/in/hebermarzan) *(opcional)*
+- ✉️ Email: test_IV@vitared.com
+
+> *"Código limpio, arquitectura sólida y UX intuitiva: la fórmula para productos digitales exitosos."*
+
+## 👨‍💻 Autor
+
+**Heber Marzán** - Full Stack Developer
+
+- GitHub: [@heberzan](https://github.com/heberzan)
+- LinkedIn: [Heber Marzán](https://linkedin.com/in/hebermarzan)
+- Email: test_IV@vitared.com
+
+## 👨‍💻 Autor
+
+**Heber Marzán** — Full Stack Developer
+
+[![GitHub](https://img.shields.io/badge/GitHub-@heberzan-181717?logo=github)](https://github.com/heberzan)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Heber%20Marzán-0A66C2?logo=linkedin)](https://linkedin.com/in/hebermarzan)
+[![Email](https://img.shields.io/badge/Email-test__IV@vitared.com-D14836?logo=gmail)](mailto:test_IV@vitared.com)
+
+> 🎓 Especialista en Salud Ocupacional & Ingeniero Industrial
+
+## 👨‍ Autor
+
+<div align="center">
+
+**Heber Marzán** — Full Stack Developer
+
+🎓 Especialista en Salud Ocupacional & Ingeniero Industrial  
+🚀 Enfocado en soluciones limpias, escalables y tipo-safe
+
+[🐙 GitHub](https://github.com/heberzan) • 
+[💼 LinkedIn](https://linkedin.com/in/hebermarzan) • 
+[✉️ Email](mailto:test_IV@vitared.com)
+
+> *"Código limpio, arquitectura sólida y UX intuitiva"*
+
+</div>
+
+---
+<div align="center">
+<sub>Construido con ❤️, TypeScript y buenas prácticas • 2025</sub>
+</div>
