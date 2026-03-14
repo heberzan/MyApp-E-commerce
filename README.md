@@ -44,3 +44,60 @@ MyApp E-commerce es una aplicación web completa para la gestión de ventas en l
 ### 🔹 DevOps & Tools
 ```bash
 Git • GitHub • ESLint • Prettier • Docker (opcional) • Vercel (deploy frontend)
+
+---
+
+## 📦 Estructura del Proyecto
+
+MyApp-E-commerce/
+│
+├── 📁 back/                     # API REST - Backend con Node.js + TypeORM
+│   ├── 📁 src/
+│   │   ├── 📁 config/           # Configuraciones: dataSource.ts, envs.ts
+│   │   ├── 📁 controllers/      # Lógica de endpoints: user, product, order
+│   │   ├── 📁 dtos/             # Data Transfer Objects para validación
+│   │   ├── 📁 entities/         # Modelos de TypeORM: User, Product, Order...
+│   │   ├── 📁 helpers/          # Scripts de precarga: categories, products
+│   │   ├── 📁 middlewares/      # Middleware de auth y validación de requests
+│   │   ├── 📁 repositories/     # Acceso a datos con patrón Repository
+│   │   ├── 📁 routes/           # Definición de rutas: users, products, orders
+│   │   ├── 📁 services/         # Lógica de negocio desacoplada
+│   │   ├── 📁 utils/            # Utilidades: catchedController, errors
+│   │   ├── index.ts             # Punto de entrada del servidor
+│   │   └── server.ts            # Configuración del servidor Express
+│   ├── .env.example             # Variables de entorno de ejemplo
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── 📁 front/                    # Frontend con Next.js 14 (App Router)
+│   ├── 📁 public/               # Assets estáticos
+│   ├── 📁 src/
+│   │   ├── 📁 app/              # Rutas con App Router
+│   │   │   ├── 📁 about/        # Página: /about
+│   │   │   ├── 📁 cart/         # Página: /cart (carrito de compras)
+│   │   │   ├── 📁 dashboard/    # Panel: /dashboard (órdenes y perfil)
+│   │   │   ├── 📁 login/        # Autenticación: /login
+│   │   │   ├── 📁 product/[productId]/  # Detalle dinámico de producto
+│   │   │   ├── 📁 register/     # Registro: /register
+│   │   │   ├── layout.tsx       # Layout raíz con providers
+│   │   │   ├── page.tsx         # Home: /
+│   │   │   └── not-found.tsx    # Página 404 personalizada
+│   │   ├── 📁 components/
+│   │   │   ├── 📁 forms/        # LoginForm.tsx, RegisterForm.tsx
+│   │   │   ├── 📁 ui/           # Componentes reutilizables: Card, Navbar...
+│   │   │   └── PasswordInput.tsx # Input con toggle de visibilidad
+│   │   ├── 📁 context/          # AuthContext.tsx, CartContext.tsx
+│   │   ├── 📁 helpers/          # NavItems.tsx, productsToPreLoad.ts
+│   │   ├── 📁 services/         # Conexión con API: auth, orders, products
+│   │   ├── 📁 types/            # Interfaces TypeScript: orders, products...
+│   │   ├── 📁 validators/       # Schemas Zod: loginSchema, registerSchema
+│   │   └── 📁 views/            # Componentes de vista: HomeView, CartView...
+│   ├── globals.css              # Estilos globales con Tailwind
+│   ├── tailwind.config.ts       # Configuración de Tailwind
+│   ├── next.config.ts           # Configuración de Next.js
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── .gitignore
+├── README.md
+└── eslint.config.mjs            # Configuración de ESLint
