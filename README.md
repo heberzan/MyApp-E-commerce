@@ -189,53 +189,19 @@ test:     Agregar o corregir pruebas
 chore:    Tareas de mantenimiento (deps, config, etc.)
 ```
 ---
-## 👨‍ Autor
+## 👨‍💻 Autor
 
 **Heber Marzán** — Full Stack Developer
 
-🎓 Especialista en Salud Ocupacional & Ingeniero Industrial  
+🎓 Ingeniero Industrial — Especialista HSEQ
+
 🚀 Enfocado en soluciones limpias, escalables y tipo-safe
-
-- 🐙 GitHub: [@heberzan](https://github.com/heberzan) ↗
--  LinkedIn: [Heber Marzán](https://linkedin.com/in/hebermarzan) *(opcional)*
-- ✉️ Email: test_IV@vitared.com
-
-> *"Código limpio, arquitectura sólida y UX intuitiva: la fórmula para productos digitales exitosos."*
-
-## 👨‍💻 Autor
-
-**Heber Marzán** - Full Stack Developer
-
-- GitHub: [@heberzan](https://github.com/heberzan)
-- LinkedIn: [Heber Marzán](https://linkedin.com/in/hebermarzan)
-- Email: test_IV@vitared.com
-
-## 👨‍💻 Autor
-
-**Heber Marzán** — Full Stack Developer
 
 [![GitHub](https://img.shields.io/badge/GitHub-@heberzan-181717?logo=github)](https://github.com/heberzan)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Heber%20Marzán-0A66C2?logo=linkedin)](https://linkedin.com/in/hebermarzan)
-[![Email](https://img.shields.io/badge/Email-test__IV@vitared.com-D14836?logo=gmail)](mailto:test_IV@vitared.com)
+[![Email](https://img.shields.io/badge/Email-hebermarzan@gmail.com-D14836?logo=gmail)](mailto:hebermarzan@gmail.com)
 
-> 🎓 Especialista en Salud Ocupacional & Ingeniero Industrial
-
-## 👨‍ Autor
-
-<div align="center">
-
-**Heber Marzán** — Full Stack Developer
-
-🎓 Especialista en Salud Ocupacional & Ingeniero Industrial  
-🚀 Enfocado en soluciones limpias, escalables y tipo-safe
-
-[🐙 GitHub](https://github.com/heberzan) • 
-[💼 LinkedIn](https://linkedin.com/in/hebermarzan) • 
-[✉️ Email](mailto:test_IV@vitared.com)
-
-> *"Código limpio, arquitectura sólida y UX intuitiva"*
-
-</div>
+> *"Código limpio, arquitectura sólida y UX intuitiva: la fórmula para productos digitales exitosos."*
 
 ---
 <div align="center">
