@@ -1,13 +1,21 @@
 {
   "name": "back",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend E-commerce con Node.js + TypeORM",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "type-check": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ecommerce",
+    "api",
+    "typescript",
+    "typeorm"
+  ],
+  "author": "Heber Marzán",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -19,7 +27,8 @@
     "reflect-metadata": "^0.2.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
