@@ -12,7 +12,7 @@ app.use(morgan('dev'));
 // Ruta raíz informativa
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
-    message: '🚀 MyApp E-commerce API',
+    message: '🚀 Bienvenidos a MyApp E-commerce API',
     version: '1.0.0',
     status: 'online',
     environment: process.env.NODE_ENV || 'development',
