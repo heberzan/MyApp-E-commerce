@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.use('/api,', router); // Prefijo '/api' (mejor práctica para APIs).
+app.use('/api', router); // Prefijo '/api' (mejor práctica para APIs).
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   res.status(err.statusCode || 500).send({
