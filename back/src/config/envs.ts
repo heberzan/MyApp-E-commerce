@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-// ✅ Priorizar DATABASE_URL para producción (Render/Neon/Supabase)
+// Priorizar DATABASE_URL para producción (Render/Neon/Supabase)
 export const DATABASE_URL: string | undefined = process.env.DATABASE_URL;
 
 // Variables individuales (fallback para desarrollo local)
