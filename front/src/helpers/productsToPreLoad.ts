@@ -4,7 +4,7 @@ const productsToPreLoad: IProduct[] = [
   {
     id: 1,
     name: 'iPhone 16 Pro',
-    price: 699,
+    price: 800,
     description:
       'Experience power and elegance with the iPhone 11: capture stunning moments with its dual-camera system, enjoy exceptional performance, and immerse yourself in a brilliant Liquid Retina display. Discover a world of possibilities in the palm of your hand!',
     image:

@@ -11,14 +11,13 @@ interface IProduct {
   stock: number;
 }
 
-const productsToPreLoad: IProduct[] = [
+export const productsToPreLoad: IProduct[] = [
   {
     name: 'iPhone 16 Pro',
     price: 699,
     description:
       'Experience power and elegance with the iPhone 11: capture stunning moments with its dual-camera system, enjoy exceptional performance, and immerse yourself in a brilliant Liquid Retina display. Discover a world of possibilities in the palm of your hand!',
-    image:
-      'https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-geo-240909_inline.jpg.large.jpg',
+    image: 'https://mac-center.com/cdn/shop/files/194252097236-7.jpg',
     categoryId: 1,
     stock: 10,
   },
@@ -27,8 +26,7 @@ const productsToPreLoad: IProduct[] = [
     price: 999,
     description:
       'Embrace efficiency and sophistication with the MacBook Air: lightweight design meets powerful performance, stunning Retina display brings your work to life, and all-day battery life keeps you productive wherever you go. Elevate your computing experience with the MacBook Air.',
-    image:
-      'https://wallpapers.com/images/high/black-macbook-1200-x-800-32aunj6i8jioq0un.webp',
+    image: 'https://co.tiendasishop.com/cdn/shop/files/mgn63la-a_1.jpg',
     categoryId: 2,
     stock: 10,
   },
@@ -38,7 +36,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       'Unleash your creativity and productivity with the iPad Pro: powerful performance, stunning Liquid Retina display, and all-day battery life make the iPad Pro the perfect tool for work and play. Transform your ideas into reality with the iPad Pro.',
     image:
-      'https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/04/ipad-pro-2021-2317515.jpg?tf=1200x',
+      'https://m.media-amazon.com/images/I/81gC7frRJyL._UF1000,1000_QL80_.jpg',
     categoryId: 3,
     stock: 10,
   },
@@ -48,7 +46,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       'Stay connected and healthy with the Apple Watch Series 6: track your workouts, monitor your health, and stay in touch with the people and information you care about most. Experience the future of health and wellness with the Apple Watch Series 6.',
     image:
-      'https://www.apple.com/newsroom/images/product/watch/standard/Apple_delivers-apple-watch-series-6_09152020_big.jpg.large.jpg',
+      'https://m.media-amazon.com/images/I/81EBU-M8c0L._UF894,1000_QL80_.jpg',
     categoryId: 4,
     stock: 10,
   },
@@ -58,7 +56,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       'Immerse yourself in sound with the AirPods Pro: active noise cancellation, transparency mode, and customizable fit make the AirPods Pro the perfect companion for music, calls, and everything in between. Elevate your audio experience with the AirPods Pro.',
     image:
-      'https://lamanzanamordida.net/app/uploads-lamanzanamordida.net/2019/11/AirPods-Pro-cancelacion-de-ruido-1024x576.jpg',
+      'https://mac-center.com/cdn/shop/files/AirPods_Pro_en_su_estuche_con_MagSafe.jpg',
     categoryId: 5,
     stock: 10,
   },
@@ -68,7 +66,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       'Elevate your home audio experience with the HomePod mini: immersive sound, intelligent assistant, and smart home hub make the HomePod mini the perfect addition to your home. Enjoy a world of music, news, and more with the HomePod mini.',
     image:
-      'https://media.istockphoto.com/id/1305312556/es/foto/apple-homepod-mini-sobre-un-fondo-oscuro.jpg?s=1024x1024&w=is&k=20&c=Hje5OreE0oOYhyphXiuudV-xrnp4zfJWR3vyZVhhzB8=',
+      'https://http2.mlstatic.com/D_NQ_NP_2X_983176-MLA95843433567_102025-F.webp',
     categoryId: 6,
     stock: 10,
   },
